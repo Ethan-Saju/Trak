@@ -24,6 +24,7 @@ public class AppUserController {
 
     @PostMapping("/")
     public ResponseEntity<AppUserDTO> createUser(@RequestBody AppUserDTO appUserDTO) {
+        System.out.println("Hello");
         return new ResponseEntity<>(appUserService.createAppUser(appUserDTO), HttpStatus.CREATED);
     }
 
