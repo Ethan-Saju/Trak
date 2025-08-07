@@ -9,7 +9,6 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
 public class BinaryHabit extends Habit {
 
