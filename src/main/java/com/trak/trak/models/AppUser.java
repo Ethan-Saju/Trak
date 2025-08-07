@@ -17,12 +17,9 @@ public class AppUser {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long appUserId;
 
-
     private String username;
 
     private String password;
-
-
 
     @OneToMany(mappedBy = "appUser", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Habit> habits;

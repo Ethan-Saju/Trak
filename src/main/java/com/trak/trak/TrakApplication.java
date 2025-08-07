@@ -9,5 +9,4 @@ public class TrakApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(TrakApplication.class, args);
 	}
-
 }
