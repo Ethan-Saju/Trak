@@ -3,6 +3,7 @@ package com.trak.trak.controllers;
 
 import com.trak.trak.payload.APIResponse;
 import com.trak.trak.payload.AppUserDTO;
+import com.trak.trak.payload.AppUserPasswordDTO;
 import com.trak.trak.payload.AppUserUsernameDTO;
 import com.trak.trak.services.AppUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,5 +40,10 @@ public class AppUserController {
     @PatchMapping("/updateUsername")
     public ResponseEntity<AppUserDTO> updateUsername(@RequestBody AppUserUsernameDTO appUserUsernameDTO) {
         return new ResponseEntity<>(appUserService.updateUsername(appUserUsernameDTO), HttpStatus.OK);
+    }
+
+    @PatchMapping("/updatePassword")
+    public ResponseEntity<AppUserDTO> updatePassword(@RequestBody AppUserPasswordDTO appUserPasswordDTO) {
+        return new ResponseEntity<>(appUserService.updatePassword(appUserPasswordDTO), HttpStatus.OK);
     }
 }
