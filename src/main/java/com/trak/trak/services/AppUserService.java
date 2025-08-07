@@ -1,13 +1,10 @@
 package com.trak.trak.services;
 
-import com.trak.trak.payload.APIResponse;
-import com.trak.trak.payload.AppUserDTO;
-import com.trak.trak.payload.AppUserPasswordDTO;
-import com.trak.trak.payload.AppUserUsernameDTO;
+import com.trak.trak.payload.*;
 
 public interface AppUserService {
 
-    public AppUserDTO createAppUser(AppUserDTO appUserDTO);
+    public AppUserDTO createAppUser(AppCreateUserDTO appUserDTO);
     public AppUserDTO getAppUser(Long appUserId);
     public AppUserDTO updateUsername(AppUserUsernameDTO appUserDTO);
     public AppUserDTO updatePassword(AppUserPasswordDTO appUserDTO);

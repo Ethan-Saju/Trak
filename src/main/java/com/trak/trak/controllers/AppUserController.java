@@ -1,17 +1,15 @@
 package com.trak.trak.controllers;
 
 
-import com.trak.trak.payload.APIResponse;
-import com.trak.trak.payload.AppUserDTO;
-import com.trak.trak.payload.AppUserPasswordDTO;
-import com.trak.trak.payload.AppUserUsernameDTO;
+import com.trak.trak.payload.*;
 import com.trak.trak.services.AppUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@RestController("/users")
+@RestController
+@RequestMapping("/users")
 public class AppUserController {
 
     private final AppUserService appUserService;
@@ -23,9 +21,8 @@ public class AppUserController {
 
 
     @PostMapping("/")
-    public ResponseEntity<AppUserDTO> createUser(@RequestBody AppUserDTO appUserDTO) {
-        System.out.println("Hello");
-        return new ResponseEntity<>(appUserService.createAppUser(appUserDTO), HttpStatus.CREATED);
+    public ResponseEntity<AppUserDTO> createUser(@RequestBody AppCreateUserDTO appCreateUserDTO) {
+        return new ResponseEntity<>(appUserService.createAppUser(appCreateUserDTO), HttpStatus.CREATED);
     }
 
     @GetMapping("/{appUserId}")
