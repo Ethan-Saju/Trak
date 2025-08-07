@@ -9,6 +9,8 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class AppUserServiceImpl implements AppUserService {
 
@@ -38,8 +40,11 @@ public class AppUserServiceImpl implements AppUserService {
 
     @Override
     public AppUserDTO getAppUser(Long appUserId) {
+        appUserRepository.findById(appUserId)
+                .orElseThrow(() -> new APIException("User not found"));
 
-        return null;
+        AppUser appUser = appUserRepository.findById(appUserId).get();
+        return modelMapper.map(appUser, AppUserDTO.class);
     }
 
     @Override
