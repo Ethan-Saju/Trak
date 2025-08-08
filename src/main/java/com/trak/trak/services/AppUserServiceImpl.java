@@ -4,12 +4,14 @@ package com.trak.trak.services;
 import com.trak.trak.exceptions.APIException;
 import com.trak.trak.models.AppUser;
 import com.trak.trak.payload.*;
+import com.trak.trak.payload.AppUser.AppCreateUserDTO;
+import com.trak.trak.payload.AppUser.AppUserDTO;
+import com.trak.trak.payload.AppUser.AppUserPasswordDTO;
+import com.trak.trak.payload.AppUser.AppUserUsernameDTO;
 import com.trak.trak.repositories.AppUserRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 @Service
 public class AppUserServiceImpl implements AppUserService {
@@ -48,19 +50,32 @@ public class AppUserServiceImpl implements AppUserService {
     }
 
     @Override
-    public AppUserDTO updateUsername(AppUserUsernameDTO appUserDTO) {
-        return null;
+    public AppUserDTO updateUsername(AppUserUsernameDTO appUserDTO, Long appUserId) {
+        AppUser appUser = appUserRepository.findById(appUserId)
+                .orElseThrow(() -> new APIException("User not found"));
+
+        appUser.setUsername(appUserDTO.getUsername());
+
+        return modelMapper.map(appUserRepository.save(appUser), AppUserDTO.class);
     }
 
     @Override
-    public AppUserDTO updatePassword(AppUserPasswordDTO appUserDTO) {
-        return null;
+    public AppUserDTO updatePassword(AppUserPasswordDTO appUserDTO, Long appUserId) {
+        AppUser appUser = appUserRepository.findById(appUserId)
+                .orElseThrow(() -> new APIException("User not found"));
+
+        appUser.setPassword(appUserDTO.getPassword());
+
+        return modelMapper.map(appUserRepository.save(appUser), AppUserDTO.class);
     }
 
     @Override
     public APIResponse deleteAppUser(Long appUserId) {
-        return null;
+        AppUser appUser = appUserRepository.findById(appUserId)
+                .orElseThrow(() -> new APIException("User not found"));
+
+        appUserRepository.delete(appUser);
+
+        return new APIResponse("User deleted successfully!", true);
     }
-
-
 }

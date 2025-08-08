@@ -2,6 +2,10 @@ package com.trak.trak.controllers;
 
 
 import com.trak.trak.payload.*;
+import com.trak.trak.payload.AppUser.AppCreateUserDTO;
+import com.trak.trak.payload.AppUser.AppUserDTO;
+import com.trak.trak.payload.AppUser.AppUserPasswordDTO;
+import com.trak.trak.payload.AppUser.AppUserUsernameDTO;
 import com.trak.trak.services.AppUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -35,13 +39,13 @@ public class AppUserController {
         return new ResponseEntity<>(appUserService.deleteAppUser(appUserId), HttpStatus.OK);
     }
 
-    @PatchMapping("/updateUsername")
-    public ResponseEntity<AppUserDTO> updateUsername(@RequestBody AppUserUsernameDTO appUserUsernameDTO) {
-        return new ResponseEntity<>(appUserService.updateUsername(appUserUsernameDTO), HttpStatus.OK);
+    @PatchMapping("/updateUsername/{appUserId}")
+    public ResponseEntity<AppUserDTO> updateUsername(@RequestBody AppUserUsernameDTO appUserUsernameDTO, @PathVariable Long appUserId) {
+        return new ResponseEntity<>(appUserService.updateUsername(appUserUsernameDTO, appUserId), HttpStatus.OK);
     }
 
-    @PatchMapping("/updatePassword")
-    public ResponseEntity<AppUserDTO> updatePassword(@RequestBody AppUserPasswordDTO appUserPasswordDTO) {
-        return new ResponseEntity<>(appUserService.updatePassword(appUserPasswordDTO), HttpStatus.OK);
+    @PatchMapping("/updatePassword/{appUserId}")
+    public ResponseEntity<AppUserDTO> updatePassword(@RequestBody AppUserPasswordDTO appUserPasswordDTO, @PathVariable Long appUserId) {
+        return new ResponseEntity<>(appUserService.updatePassword(appUserPasswordDTO, appUserId), HttpStatus.OK);
     }
 }

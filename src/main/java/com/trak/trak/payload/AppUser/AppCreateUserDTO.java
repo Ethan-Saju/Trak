@@ -1,4 +1,4 @@
-package com.trak.trak.payload;
+package com.trak.trak.payload.AppUser;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
