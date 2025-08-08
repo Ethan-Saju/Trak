@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 
 public class HabitDTO {
+    private String type;
     private Long id;
     private String habitName;
     private String description;
