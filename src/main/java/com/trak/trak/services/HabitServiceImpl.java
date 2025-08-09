@@ -58,7 +58,6 @@ public class HabitServiceImpl implements HabitService {
                 .findByHabitIdAndAppUser_appUserId(habitId, appUserId)
                 .orElseThrow(() -> new APIException("Habit not found"));
 
-
         return mapHabitToHabitDTO(habit);
 
     }
@@ -67,6 +66,12 @@ public class HabitServiceImpl implements HabitService {
     public HabitDTO createHabit(Long appUserId, HabitCreateDTO habitCreateDTO) {
 
         appUserRepository.findById(appUserId).orElseThrow(() -> new APIException("User not found"));
+
+        habitRepository
+                .findByHabitNameAndAppUser_appUserId(habitCreateDTO.getHabitName(), appUserId)
+                .ifPresent(habit -> {
+                    throw new APIException("Habit name already exists");
+                });
 
         Habit habit = mapHabitCreateDTOToHabit(habitCreateDTO);
 
@@ -78,12 +83,45 @@ public class HabitServiceImpl implements HabitService {
 
     @Override
     public HabitDTO updateHabit(Long appUserId, Long habitId, HabitCreateDTO habitCreateDTO) {
-        return null;
+
+        appUserRepository.findById(appUserId).orElseThrow(() -> new APIException("User not found"));
+
+        Habit habit = habitRepository
+                .findByHabitIdAndAppUser_appUserId(habitId, appUserId)
+                .orElseThrow(() -> new APIException("Habit not found"));
+
+
+
+        habitRepository
+            .findByHabitNameAndAppUser_appUserId(habitCreateDTO.getHabitName(), appUserId)
+            .ifPresent(existingHabit -> {
+                if (! existingHabit.getHabitId().equals(habitId))
+                    throw new APIException("Habit name already exists");
+            });
+
+
+
+        if (!validateHabitType(habit, habitCreateDTO))
+            throw new APIException("Cannot update habit type");
+
+        modelMapper.map(habitCreateDTO, habit);
+
+        return mapHabitToHabitDTO(habitRepository.save(habit));
     }
 
     @Override
     public APIResponse deleteHabit(Long appUserId, Long habitId) {
-        return null;
+
+        appUserRepository.findById(appUserId).orElseThrow(() -> new APIException("User not found"));
+
+        Habit habit = habitRepository
+                .findByHabitIdAndAppUser_appUserId(habitId, appUserId)
+                .orElseThrow(() -> new APIException("Habit not found"));
+
+        habitRepository.delete(habit);
+
+        return new APIResponse("Habit deleted successfully!", true);
+
     }
 
     private HabitDTO mapHabitToHabitDTO(Habit habit)  {
@@ -118,4 +156,11 @@ public class HabitServiceImpl implements HabitService {
 
     }
 
+    private boolean validateHabitType(Habit habit , HabitCreateDTO habitCreateDTO) {
+        return (
+                (habit instanceof NumericHabit numericHabit && habitCreateDTO instanceof NumericHabitCreateDTO)
+                || (habit instanceof BinaryHabit binaryHabit && habitCreateDTO instanceof BinaryHabitCreateDTO)
+        );
+
+    }
 }

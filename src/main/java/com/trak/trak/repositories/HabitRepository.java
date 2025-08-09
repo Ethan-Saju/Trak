@@ -16,4 +16,6 @@ public interface HabitRepository extends JpaRepository<Habit, Long> {
     List<Habit> findAllByAppUser_appUserId(Long appUserAppUserId);
 
     Optional<Habit> findByHabitIdAndAppUser_appUserId(Long habitId, Long appUserAppUserId1);
+
+    Optional<Habit> findByHabitNameAndAppUser_appUserId(String habitName, Long appUserAppUserId);
 }

@@ -54,6 +54,12 @@ public class AppUserServiceImpl implements AppUserService {
         AppUser appUser = appUserRepository.findById(appUserId)
                 .orElseThrow(() -> new APIException("User not found"));
 
+        appUserRepository.findByUsername(appUserDTO.getUsername())
+                .ifPresent(user -> {
+                    if (!user.getAppUserId().equals(appUserId))
+                        throw new APIException("Username already exists");
+                });
+
         appUser.setUsername(appUserDTO.getUsername());
 
         return modelMapper.map(appUserRepository.save(appUser), AppUserDTO.class);

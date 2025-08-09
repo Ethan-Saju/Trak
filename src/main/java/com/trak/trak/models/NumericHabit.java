@@ -5,6 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
+
+import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
 @Entity
@@ -13,4 +16,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class NumericHabit extends Habit {
     private Double target;
+
+    public NumericHabit(Long habitId, String habitName, String description, Boolean isActive, AppUser appUser, Double target, List<HabitLog> habitLogs) {
+        super(habitId, habitName, description, isActive, appUser,habitLogs);
+        this.target = target;
+    }
 }
