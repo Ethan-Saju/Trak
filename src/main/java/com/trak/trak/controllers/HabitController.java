@@ -55,6 +55,14 @@ public class HabitController {
         return new ResponseEntity<>(habitService.updateHabit(appUserId, habitId, habitCreateDTO), HttpStatus.OK);
     }
 
+    @PatchMapping("/toggleActivity/{appUserId}/{habitId}")
+    public ResponseEntity<HabitDTO> toggleHabitActivity(
+            @PathVariable Long appUserId,
+            @PathVariable Long habitId
+    ) {
+        return new ResponseEntity<>(habitService.toggleHabitActivity(appUserId, habitId), HttpStatus.OK);
+    }
+
     @DeleteMapping("/{appUserId}/{habitId}")
     public ResponseEntity<APIResponse> deleteHabit(
             @PathVariable Long appUserId,

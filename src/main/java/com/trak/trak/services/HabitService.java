@@ -16,14 +16,9 @@ public interface HabitService {
 
     HabitDTO updateHabit(Long appUserId, Long habitId, HabitCreateDTO habitCreateDTO);
 
+    HabitDTO toggleHabitActivity(Long appUserId, Long habitId);
+
     APIResponse deleteHabit(Long appUserId, Long habitId);
 
-    //Calender Views
-    //Get habitLogs by date
-    //Get habitLogs by week
-    //Get habitLogs by month
-    //Get habitLogs by year
-    //calc current streak
-    //calc longest streak
 
 }

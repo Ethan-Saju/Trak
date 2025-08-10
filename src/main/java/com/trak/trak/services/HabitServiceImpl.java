@@ -74,6 +74,9 @@ public class HabitServiceImpl implements HabitService {
                 });
 
         Habit habit = mapHabitCreateDTOToHabit(habitCreateDTO);
+        habit.setCurrentStreak(0);
+        habit.setLongestStreak(0);
+        habit.setIsActive(true);
 
         habit.setAppUser(appUserRepository.findById(appUserId).get());
 
@@ -107,6 +110,21 @@ public class HabitServiceImpl implements HabitService {
         modelMapper.map(habitCreateDTO, habit);
 
         return mapHabitToHabitDTO(habitRepository.save(habit));
+    }
+
+    @Override
+    public HabitDTO toggleHabitActivity(Long appUserId, Long habitId) {
+
+        appUserRepository.findById(appUserId).orElseThrow(() -> new APIException("User not found"));
+
+        Habit habit = habitRepository
+                .findByHabitIdAndAppUser_appUserId(habitId, appUserId)
+                .orElseThrow(() -> new APIException("Habit not found"));
+
+        habit.setIsActive(!habit.getIsActive());
+
+        return mapHabitToHabitDTO(habitRepository.save(habit));
+
     }
 
     @Override

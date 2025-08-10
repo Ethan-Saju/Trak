@@ -17,5 +17,4 @@ import lombok.Data;
 public abstract class HabitCreateDTO {
     private String habitName;
     private String description;
-    private Boolean isActive;
 }
