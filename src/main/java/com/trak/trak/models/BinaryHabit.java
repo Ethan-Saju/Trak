@@ -16,8 +16,8 @@ import java.util.List;
 @NoArgsConstructor
 public class BinaryHabit extends Habit {
 
-    public BinaryHabit(Long habitId, String habitName, String description, Boolean isActive, AppUser appUser, List<HabitLog> habitLogs) {
-        super(habitId, habitName, description, isActive, appUser,habitLogs);
+    public BinaryHabit(Long habitId, String habitName, String description, Boolean isActive, Integer currentStreak, Integer longestStreak, AppUser appUser, List<HabitLog> habitLogs) {
+        super(habitId, habitName, description, isActive,currentStreak,longestStreak, appUser,habitLogs);
     }
 }
 

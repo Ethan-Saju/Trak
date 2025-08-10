@@ -17,8 +17,8 @@ import java.util.List;
 public class NumericHabit extends Habit {
     private Double target;
 
-    public NumericHabit(Long habitId, String habitName, String description, Boolean isActive, AppUser appUser, Double target, List<HabitLog> habitLogs) {
-        super(habitId, habitName, description, isActive, appUser,habitLogs);
+    public NumericHabit(Long habitId, String habitName, String description, Boolean isActive, Integer currentStreak, Integer longestStreak, AppUser appUser, Double target, List<HabitLog> habitLogs) {
+        super(habitId, habitName, description, isActive,currentStreak, longestStreak, appUser,habitLogs);
         this.target = target;
     }
 }

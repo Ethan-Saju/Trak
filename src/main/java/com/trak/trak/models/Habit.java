@@ -28,6 +28,10 @@ public abstract class Habit {
 
     private Boolean isActive;
 
+    private Integer currentStreak;
+
+    private Integer longestStreak;
+
     @ManyToOne
     @JoinColumn(name = "app_user_id")
     private AppUser appUser;

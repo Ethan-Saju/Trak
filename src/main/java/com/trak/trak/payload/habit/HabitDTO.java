@@ -13,5 +13,7 @@ public class HabitDTO {
     private Long id;
     private String habitName;
     private String description;
+    private Integer currentStreak;
+    private Integer longestStreak;
     private Boolean isActive;
 }

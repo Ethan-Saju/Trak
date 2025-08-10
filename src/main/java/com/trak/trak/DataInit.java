@@ -41,23 +41,24 @@ public class DataInit {
             // Save habits in one shot, fetching users inline
             habitRepository.saveAll(List.of(
                     // User 1 habits
-                    new NumericHabit(null, "Daily Steps", "Walk a certain number of steps", true, appUserRepository.findById(1L).get(), 10000.0, new ArrayList<>()),
-                    new NumericHabit(null, "Push-ups", "Do push-ups daily", false, appUserRepository.findById(1L).get(), 50.0, new ArrayList<>()),
-                    new BinaryHabit(null, "Read a Book", "Read at least once a day", true, appUserRepository.findById(1L).get(), new ArrayList<>()),
-                    new BinaryHabit(null, "No Sugar", "Avoid sugar all day", true, appUserRepository.findById(1L).get(), new ArrayList<>()),
+                    new NumericHabit(null, "Daily Steps", "Walk a certain number of steps", true, 0, 0, appUserRepository.findById(1L).get(), 10000.0, new ArrayList<>()),
+                    new NumericHabit(null, "Push-ups", "Do push-ups daily", false, 0, 0, appUserRepository.findById(1L).get(), 50.0, new ArrayList<>()),
+                    new BinaryHabit(null, "Read a Book", "Read at least once a day", true, 0, 0, appUserRepository.findById(1L).get(), new ArrayList<>()),
+                    new BinaryHabit(null, "No Sugar", "Avoid sugar all day", true, 0, 0, appUserRepository.findById(1L).get(), new ArrayList<>()),
 
                     // User 2 habits
-                    new NumericHabit(null, "Cycling Distance", "Cycle a certain distance", true, appUserRepository.findById(2L).get(), 15.0, new ArrayList<>()),
-                    new NumericHabit(null, "Squats", "Do squats daily", false, appUserRepository.findById(2L).get(), 40.0, new ArrayList<>()),
-                    new BinaryHabit(null, "Meditate", "Meditate once a day", false, appUserRepository.findById(2L).get(), new ArrayList<>()),
-                    new BinaryHabit(null, "No Caffeine", "Avoid caffeine all day", true, appUserRepository.findById(2L).get(), new ArrayList<>()),
+                    new NumericHabit(null, "Cycling Distance", "Cycle a certain distance", true, 0, 0, appUserRepository.findById(2L).get(), 15.0, new ArrayList<>()),
+                    new NumericHabit(null, "Squats", "Do squats daily", false, 0, 0, appUserRepository.findById(2L).get(), 40.0, new ArrayList<>()),
+                    new BinaryHabit(null, "Meditate", "Meditate once a day", false, 0, 0, appUserRepository.findById(2L).get(), new ArrayList<>()),
+                    new BinaryHabit(null, "No Caffeine", "Avoid caffeine all day", true, 0, 0, appUserRepository.findById(2L).get(), new ArrayList<>()),
 
                     // User 3 habits
-                    new NumericHabit(null, "Swimming Laps", "Swim a certain number of laps", false, appUserRepository.findById(3L).get(), 20.0, new ArrayList<>()),
-                    new NumericHabit(null, "Plank Time", "Hold a plank for minutes", true, appUserRepository.findById(3L).get(), 5.0, new ArrayList<>()),
-                    new BinaryHabit(null, "Write Journal", "Write in journal daily", true, appUserRepository.findById(3L).get(), new ArrayList<>()),
-                    new BinaryHabit(null, "No Social Media", "Avoid social media all day", false, appUserRepository.findById(3L).get(), new ArrayList<>())
+                    new NumericHabit(null, "Swimming Laps", "Swim a certain number of laps", false, 0, 0, appUserRepository.findById(3L).get(), 20.0, new ArrayList<>()),
+                    new NumericHabit(null, "Plank Time", "Hold a plank for minutes", true, 0, 0, appUserRepository.findById(3L).get(), 5.0, new ArrayList<>()),
+                    new BinaryHabit(null, "Write Journal", "Write in journal daily", true, 0, 0, appUserRepository.findById(3L).get(), new ArrayList<>()),
+                    new BinaryHabit(null, "No Social Media", "Avoid social media all day", false, 0, 0, appUserRepository.findById(3L).get(), new ArrayList<>())
             ));
+
 
 
         };

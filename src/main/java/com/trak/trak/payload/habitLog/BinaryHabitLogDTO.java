@@ -1,15 +1,13 @@
-package com.trak.trak.models;
+package com.trak.trak.payload.habitLog;
 
-import jakarta.persistence.Entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @EqualsAndHashCode(callSuper = true)
-@Entity
 @Data
 @AllArgsConstructor
-public class BinaryHabitLog extends HabitLog {
-
+@NoArgsConstructor
+public class BinaryHabitLogDTO extends HabitLogDTO {
 }

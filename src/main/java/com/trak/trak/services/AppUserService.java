@@ -1,10 +1,10 @@
 package com.trak.trak.services;
 
 import com.trak.trak.payload.*;
-import com.trak.trak.payload.AppUser.AppCreateUserDTO;
-import com.trak.trak.payload.AppUser.AppUserDTO;
-import com.trak.trak.payload.AppUser.AppUserPasswordDTO;
-import com.trak.trak.payload.AppUser.AppUserUsernameDTO;
+import com.trak.trak.payload.appUser.AppCreateUserDTO;
+import com.trak.trak.payload.appUser.AppUserDTO;
+import com.trak.trak.payload.appUser.AppUserPasswordDTO;
+import com.trak.trak.payload.appUser.AppUserUsernameDTO;
 
 public interface AppUserService {
 
