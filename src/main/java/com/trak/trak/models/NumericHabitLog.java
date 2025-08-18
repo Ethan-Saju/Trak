@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
+
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Data
@@ -13,4 +15,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class NumericHabitLog extends HabitLog {
     private Double progress;
+
+    public NumericHabitLog(Long id, LocalDate date, String note , NumericHabit numericHabit, double progress) {
+        super(id, date , note , numericHabit);
+        this.progress = progress;
+    }
 }

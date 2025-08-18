@@ -16,6 +16,8 @@ public class HabitLogDTO {
 
     private Long logId;
 
+    private String type;
+
     private LocalDate habitDate;
 
     private String note;

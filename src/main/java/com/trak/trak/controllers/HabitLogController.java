@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -38,8 +39,8 @@ public class HabitLogController {
     public ResponseEntity<List<HabitLogDTO>> getHabitLogsByDate(
             @PathVariable Long appUserId,
             @PathVariable Long habitId,
-            @RequestParam String startDate,
-            @RequestParam String endDate
+            @RequestParam LocalDate startDate,
+            @RequestParam LocalDate endDate
     ) {
         return new ResponseEntity<>(habitLogService.getHabitLogsByDate(appUserId, habitId, startDate, endDate), HttpStatus.OK);
     }

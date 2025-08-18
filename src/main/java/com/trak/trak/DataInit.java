@@ -2,10 +2,9 @@ package com.trak.trak;
 
 
 import com.trak.trak.config.AppConfig;
-import com.trak.trak.models.AppUser;
-import com.trak.trak.models.BinaryHabit;
-import com.trak.trak.models.NumericHabit;
+import com.trak.trak.models.*;
 import com.trak.trak.repositories.AppUserRepository;
+import com.trak.trak.repositories.HabitLogRepository;
 import com.trak.trak.repositories.HabitRepository;
 import com.trak.trak.services.HabitService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +12,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,15 +21,17 @@ public class DataInit {
 
     private final AppUserRepository appUserRepository;
     private final HabitRepository habitRepository;
+    private final HabitLogRepository habitLogRepository;
 
     @Autowired
-    public DataInit(AppUserRepository appUserRepository, HabitRepository habitRepository) {
+    public DataInit(AppUserRepository appUserRepository, HabitRepository habitRepository, HabitLogRepository habitLogRepository) {
         this.appUserRepository = appUserRepository;
         this.habitRepository = habitRepository;
+        this.habitLogRepository = habitLogRepository;
     }
 
     @Bean
-    public CommandLineRunner dataInitializer(AppUserRepository appUserRepository, HabitRepository habitRepository) {
+    public CommandLineRunner dataInitializer(AppUserRepository appUserRepository, HabitRepository habitRepository, HabitLogRepository habitLogRepository) {
         return args -> {
             // Save users first
             appUserRepository.saveAll(List.of(
@@ -57,6 +59,30 @@ public class DataInit {
                     new NumericHabit(null, "Plank Time", "Hold a plank for minutes", true, 0, 0, appUserRepository.findById(3L).get(), 5.0, new ArrayList<>()),
                     new BinaryHabit(null, "Write Journal", "Write in journal daily", true, 0, 0, appUserRepository.findById(3L).get(), new ArrayList<>()),
                     new BinaryHabit(null, "No Social Media", "Avoid social media all day", false, 0, 0, appUserRepository.findById(3L).get(), new ArrayList<>())
+            ));
+
+            NumericHabit dailySteps = (NumericHabit) habitRepository.findById(1L).get();
+
+            BinaryHabit readBook = (BinaryHabit) habitRepository.findById(3L).get();
+
+            LocalDate today = LocalDate.now();
+
+            // --- Numeric Habit Logs (Daily Steps) ---
+            habitLogRepository.saveAll(List.of(
+                    new NumericHabitLog(null, today, "Log for today",  dailySteps, 0.0),
+                    new NumericHabitLog(null, today.minusDays(1), "Log for yesterday", dailySteps, 0.0),
+                    new NumericHabitLog(null, today.minusDays(2), "Log two days ago", dailySteps, 0.0),
+                    new NumericHabitLog(null, today.minusDays(3), "Log three days ago", dailySteps, 0.0),
+                    new NumericHabitLog(null, today.minusDays(4), "Log four days ago", dailySteps, 0.0)
+            ));
+
+            // --- Binary Habit Logs (Read a Book) ---
+            habitLogRepository.saveAll(List.of(
+                    new BinaryHabitLog(null, today, "Log for today", readBook, false),
+                    new BinaryHabitLog(null, today.minusDays(1), "Log for yesterday",  readBook, false),
+                    new BinaryHabitLog(null, today.minusDays(2), "Log two days ago", readBook, false),
+                    new BinaryHabitLog(null, today.minusDays(3), "Log three days ago", readBook, false),
+                    new BinaryHabitLog(null, today.minusDays(4), "Log four days ago", readBook, false)
             ));
 
 

@@ -24,8 +24,6 @@ public abstract class HabitLog {
 
     private String note;
 
-    private Boolean completed;
-
     @ManyToOne
     @JoinColumn(name = "habit_id")
     private Habit habit;

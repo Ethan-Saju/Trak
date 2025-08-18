@@ -3,6 +3,7 @@ package com.trak.trak.services;
 import com.trak.trak.payload.habitLog.HabitLogDTO;
 import com.trak.trak.payload.habitLog.HabitLogUpdateDTO;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public interface HabitLogService {
@@ -23,7 +24,7 @@ public interface HabitLogService {
     //with pagination
     //with info completed/total
     //make custom response that also mentioned that info
-    List<HabitLogDTO> getHabitLogsByDate(Long appUserId, Long habitId, String startDate, String endDate);
+    List<HabitLogDTO> getHabitLogsByDate(Long appUserId, Long habitId, LocalDate startDate, LocalDate endDate);
 
 
 

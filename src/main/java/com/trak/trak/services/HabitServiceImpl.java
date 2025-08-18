@@ -43,8 +43,6 @@ public class HabitServiceImpl implements HabitService {
             default -> throw new APIException("Invalid type");
         }
 
-        if (habits.isEmpty()) throw new APIException("No habits found");
-
         return habits.stream().map(this::mapHabitToHabitDTO).toList();
 
     }
