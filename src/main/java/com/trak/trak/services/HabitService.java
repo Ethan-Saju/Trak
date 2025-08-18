@@ -17,6 +17,8 @@ public interface HabitService {
     HabitDTO updateHabit(Long appUserId, Long habitId, HabitCreateDTO habitCreateDTO);
 
     HabitDTO toggleHabitActivity(Long appUserId, Long habitId);
+    //to complete- > if they toggle from active to inactive we need to delete habit log for the day
+    //if they toggle from inactive to active we need to create habit log for the day
 
     APIResponse deleteHabit(Long appUserId, Long habitId);
 
