@@ -4,6 +4,7 @@ import com.trak.trak.models.HabitLog;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -21,4 +22,6 @@ public interface HabitLogRepository extends JpaRepository<HabitLog, Long> {
             LocalDate startDate,
             LocalDate endDate
     );
+
+    Optional<HabitLog> findByHabit_HabitIdAndHabit_AppUser_AppUserIdAndDate(Long habitId, Long appUserId, LocalDate now);
 }

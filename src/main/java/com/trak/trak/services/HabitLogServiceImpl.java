@@ -40,22 +40,25 @@ public class HabitLogServiceImpl implements HabitLogService {
 
 
     @Override
-    public HabitLogDTO updateHabitLog(Long appUserId, Long logId, HabitLogUpdateDTO habitLogUpdateDTO) {
+    public HabitLogDTO updateHabitLog(Long appUserId, Long habitId, HabitLogUpdateDTO habitLogUpdateDTO) {
         appUserRepository.findById(appUserId)
                 .orElseThrow(() -> new APIException("User not found"));
 
         HabitLog habitLog = habitLogRepository
-                .findByLogIdAndHabit_AppUser_AppUserId(logId, appUserId)
-                .orElseThrow(() -> new APIException("Habit log not found"));
+                .findByHabit_HabitIdAndHabit_AppUser_AppUserIdAndDate(habitId, appUserId, LocalDate.now())
+                .orElseThrow(() -> new APIException("HabitLog not found"));
 
-        habitLog.setNote(habitLogUpdateDTO.getNote());
+        System.out.println(habitLogUpdateDTO);
+        System.out.println(habitLog);
+
+        if (habitLogUpdateDTO.getNote() != null) habitLog.setNote(habitLogUpdateDTO.getNote());
 
         if (habitLogUpdateDTO instanceof BinaryHabitLogUpdateDTO binaryHabitLogUpdateDTO
                 && habitLog instanceof BinaryHabitLog binaryHabitLog) {
-            binaryHabitLog.setComplete(binaryHabitLogUpdateDTO.getComplete());
+            if (binaryHabitLogUpdateDTO.getComplete() != null) binaryHabitLog.setComplete(binaryHabitLogUpdateDTO.getComplete());
         } else if (habitLogUpdateDTO instanceof NumericHabitLogUpdateDTO numericHabitLogUpdateDTO
                 && habitLog instanceof NumericHabitLog numericHabitLog) {
-            numericHabitLog.setProgress(numericHabitLogUpdateDTO.getProgress());
+            if (numericHabitLogUpdateDTO.getProgress() != null) numericHabitLog.setProgress(numericHabitLogUpdateDTO.getProgress());
         } else {
             throw new APIException("HabitLog type and DTO type mismatch");
         }

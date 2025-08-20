@@ -26,7 +26,7 @@ public class HabitLogController {
         return new ResponseEntity<>(habitLogService.getHabitLogs(appUserId), HttpStatus.OK);
     }
 
-    @PatchMapping("/{appUserId}/habitLogID")
+    @PatchMapping("/{appUserId}/{habitLogId}")
     public ResponseEntity<HabitLogDTO> updateHabitLog(
             @PathVariable Long appUserId,
             @PathVariable Long habitLogId,

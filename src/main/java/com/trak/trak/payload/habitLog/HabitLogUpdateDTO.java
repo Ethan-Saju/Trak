@@ -21,7 +21,7 @@ import lombok.NoArgsConstructor;
 )
 @JsonSubTypes({
         @JsonSubTypes.Type(value = NumericHabitLogUpdateDTO.class, name = "numeric"),
-        @JsonSubTypes.Type(value = BinaryHabitLogDTO.class, name = "binary")
+        @JsonSubTypes.Type(value = BinaryHabitLogUpdateDTO.class, name = "binary")
 })
 
 public class HabitLogUpdateDTO {
