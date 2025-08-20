@@ -20,7 +20,7 @@ public abstract class HabitLog {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long logId;
 
-    private LocalDate habitDate;
+    private LocalDate date;
 
     private String note;
 

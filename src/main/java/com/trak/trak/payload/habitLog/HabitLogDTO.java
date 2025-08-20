@@ -22,8 +22,6 @@ public class HabitLogDTO {
 
     private String note;
 
-    private Boolean completed;
-
     private String habitName;
 
 

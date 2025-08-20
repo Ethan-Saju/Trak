@@ -15,10 +15,10 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class BinaryHabitLog extends HabitLog {
 
-    private boolean completed;
+    private boolean complete;
 
-    public BinaryHabitLog(Long id, LocalDate date, String note , BinaryHabit binaryHabit, boolean completed) {
+    public BinaryHabitLog(Long id, LocalDate date, String note , BinaryHabit binaryHabit, boolean complete) {
         super(id, date , note , binaryHabit);
-        this.completed = completed;
+        this.complete = complete;
     }
 }

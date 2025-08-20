@@ -16,7 +16,7 @@ import java.time.LocalDate;
 public class NumericHabitLog extends HabitLog {
     private Double progress;
 
-    public NumericHabitLog(Long id, LocalDate date, String note , NumericHabit numericHabit, double progress) {
+    public NumericHabitLog(Long id, LocalDate date, String note , NumericHabit numericHabit, Double progress) {
         super(id, date , note , numericHabit);
         this.progress = progress;
     }

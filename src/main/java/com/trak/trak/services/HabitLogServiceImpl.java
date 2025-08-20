@@ -32,7 +32,7 @@ public class HabitLogServiceImpl implements HabitLogService {
 
         appUserRepository.findById(appUserId).orElseThrow(() -> new APIException("User not found"));
 
-        List<HabitLog> habitLogs = habitLogRepository.findAllByAppUser_appUserId(appUserId);
+        List<HabitLog> habitLogs = habitLogRepository.findAllByHabit_AppUser_AppUserIdAndDate(appUserId, LocalDate.now());
 
         return habitLogs.stream().map(this::mapHabitLogToHabitLogDTO).toList();
     }
@@ -45,14 +45,14 @@ public class HabitLogServiceImpl implements HabitLogService {
                 .orElseThrow(() -> new APIException("User not found"));
 
         HabitLog habitLog = habitLogRepository
-                .findByLogIdAndAppUser_appUserId(logId, appUserId)
+                .findByLogIdAndHabit_AppUser_AppUserId(logId, appUserId)
                 .orElseThrow(() -> new APIException("Habit log not found"));
 
         habitLog.setNote(habitLogUpdateDTO.getNote());
 
         if (habitLogUpdateDTO instanceof BinaryHabitLogUpdateDTO binaryHabitLogUpdateDTO
                 && habitLog instanceof BinaryHabitLog binaryHabitLog) {
-            binaryHabitLog.setCompleted(binaryHabitLogUpdateDTO.getComplete());
+            binaryHabitLog.setComplete(binaryHabitLogUpdateDTO.getComplete());
         } else if (habitLogUpdateDTO instanceof NumericHabitLogUpdateDTO numericHabitLogUpdateDTO
                 && habitLog instanceof NumericHabitLog numericHabitLog) {
             numericHabitLog.setProgress(numericHabitLogUpdateDTO.getProgress());
@@ -69,7 +69,7 @@ public class HabitLogServiceImpl implements HabitLogService {
 
         appUserRepository.findById(appUserId).orElseThrow(() -> new APIException("User not found"));
 
-        List<HabitLog> habitLogs = habitLogRepository.findAllByAppUser_appUserIdAndHabit_habitIdAndLogDateBetween(appUserId, habitId,startDate, endDate);
+        List<HabitLog> habitLogs = habitLogRepository.findAllByHabit_AppUser_AppUserIdAndHabit_habitIdAndDateBetween(appUserId, habitId,startDate, endDate);
 
 
         return habitLogs.stream().map(this::mapHabitLogToHabitLogDTO).toList();
@@ -84,7 +84,7 @@ public class HabitLogServiceImpl implements HabitLogService {
             habitLogDTO.setType("binary");
         } else {
 
-            habitLogDTO = modelMapper.map(habitLog, HabitLogDTO.class);
+            habitLogDTO = modelMapper.map(habitLog, NumericHabitLogDTO.class);
             habitLogDTO.setType("numeric");
         }
 

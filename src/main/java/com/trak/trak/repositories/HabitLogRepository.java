@@ -11,11 +11,11 @@ import java.util.Optional;
 @Repository
 public interface HabitLogRepository extends JpaRepository<HabitLog, Long> {
 
-    List<HabitLog> findAllByAppUser_appUserId(Long appUserId);
+    List<HabitLog> findAllByHabit_AppUser_AppUserIdAndDate(Long appUserId , LocalDate date);
 
-    Optional<HabitLog> findByLogIdAndAppUser_appUserId(Long logId, Long appUserId);
+    Optional<HabitLog> findByLogIdAndHabit_AppUser_AppUserId(Long logId, Long appUserId);
 
-    List<HabitLog> findAllByAppUser_appUserIdAndHabit_habitIdAndLogDateBetween(
+    List<HabitLog> findAllByHabit_AppUser_AppUserIdAndHabit_habitIdAndDateBetween(
             Long appUserId,
             Long habitId,
             LocalDate startDate,
